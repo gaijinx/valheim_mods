@@ -52,11 +52,10 @@ namespace SailingSkill
                 Debug.Log("Mod Config Enforcer not detected.");
             }
 
-            skillIncrease = new ConfigVariable<float>(assembly, config, id, "SkillIncrease", .05f, "Leveling", "Higher the value the faster it levels up", true);
+            skillIncrease = new ConfigVariable<float>(assembly, config, id, "SkillIncrease", .001f, "Leveling", "Higher the value the faster it levels up", true);
             maxTailwindBoost = new ConfigVariable<float>(assembly, config, id, "maxTailwindBoost", .5f, "Limits", "Maximum tailwind boost", true);
             maxForewindDampener = new ConfigVariable<float>(assembly, config, id, "maxForewindDampener", .5f, "Limits", "Maximum forewind slowdown force dampener", true);
             maxDamageReduction = new ConfigVariable<float>(assembly, config, id, "maxDamageReduction", .5f, "Limits", "Maximum ship damage reduction", true);
-
         }
     }
 }
