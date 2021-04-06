@@ -11,7 +11,7 @@ namespace SailingSkill
 {
     public class SailingConfig
     {
-        public int NEXUS_ID = 123123;
+        public int NEXUS_ID = 922;
 
         private ConfigVariable<float> skillIncrease;
         private ConfigVariable<float> maxTailwindBoost;
@@ -37,7 +37,7 @@ namespace SailingSkill
 
         public void InitConfig(string id, ConfigFile config)
         {
-            config.Bind<int>("General", "NexusID", 123123, "Nexus mod ID for updates");
+            config.Bind<int>("General", "NexusID", NEXUS_ID, "Nexus mod ID for updates");
 
             var assembly = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(a => a.GetName().Name == "ModConfigEnforcer");
 
