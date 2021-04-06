@@ -11,4 +11,6 @@ Requirements:
 - [BepInEx](https://valheim.thunderstore.io/package/denikson/BepInExPack_Valheim/)
 - [Skill Injector](https://www.nexusmods.com/valheim/mods/341)
 
+Mod should work with [Mod Config Enforcer](https://www.nexusmods.com/valheim/mods/460)
+
 Mod source: [GitHub repo](https://github.com/gaijinx/valheim_mods/tree/main/sailing_skill)
