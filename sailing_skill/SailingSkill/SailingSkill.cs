@@ -7,7 +7,7 @@ using UnityEngine;
 namespace SailingSkill
 {
 
-    [BepInPlugin("gaijinx.mod.sailing_skill", "SailingSkill", "1.0.2")]
+    [BepInPlugin("gaijinx.mod.sailing_skill", "SailingSkill", "1.1.0")]
     [BepInDependency("pfhoenix.modconfigenforcer", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.pipakin.SkillInjectorMod")]
     public class SailingSkillsPlugin : BaseUnityPlugin
