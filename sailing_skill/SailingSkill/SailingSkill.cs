@@ -94,6 +94,7 @@ namespace SailingSkill
         [HarmonyPatch(typeof(Ship), "FixedUpdate")]
         public static class FixedUpdate_Patch
         {
+            private static float m_increase_timer = 0f;
             private static void Postfix(ref Ship __instance)
             {
 
@@ -101,7 +102,27 @@ namespace SailingSkill
                     Ship.Speed shipSpeed = __instance.GetSpeedSetting();
                     if (shipSpeed != Ship.Speed.Stop)
                     {
-                        Player.m_localPlayer.RaiseSkill((Skills.SkillType) SKILL_TYPE, sailingConfig.SkillIncrease);
+                        switch (shipSpeed)
+                        {
+                            case Ship.Speed.Back:
+                                m_increase_timer += 1f;
+                                break;
+                            case Ship.Speed.Slow:
+                                m_increase_timer += 1f;
+                                break;
+                            case Ship.Speed.Half:
+                                m_increase_timer += sailingConfig.HalfSailSkillIncreaseMultiplier;
+                                break;
+                            case Ship.Speed.Full:
+                                m_increase_timer += sailingConfig.FullSailSkillIncreaseMultiplier;
+                                break;
+                        }
+                        if (m_increase_timer >= sailingConfig.SkillIncreaseTick)
+                        {
+                            Player.m_localPlayer.RaiseSkill((Skills.SkillType)SKILL_TYPE, sailingConfig.SkillIncrease);
+                            m_increase_timer -= sailingConfig.SkillIncreaseTick;
+                        }
+                        UnityEngine.Debug.Log(m_increase_timer); // TODO remove
                     }
                 }
             }
