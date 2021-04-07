@@ -7,7 +7,7 @@ using UnityEngine;
 namespace SailingSkill
 {
 
-    [BepInPlugin("gaijinx.mod.sailing_skill", "SailingSkill", "1.1.1")]
+    [BepInPlugin("gaijinx.mod.sailing_skill", "SailingSkill", "1.1.2")]
     [BepInDependency("pfhoenix.modconfigenforcer", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.pipakin.SkillInjectorMod")]
     public class SailingSkillsPlugin : BaseUnityPlugin
@@ -97,7 +97,6 @@ namespace SailingSkill
             private static float m_increase_timer = 0f;
             private static void Postfix(ref Ship __instance)
             {
-
                 if (IsPlayerControlling(__instance)) {
                     Ship.Speed shipSpeed = __instance.GetSpeedSetting();
                     if (shipSpeed != Ship.Speed.Stop)
