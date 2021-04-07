@@ -17,6 +17,9 @@ namespace SailingSkill
         private ConfigVariable<float> maxTailwindBoost;
         private ConfigVariable<float> maxForewindDampener;
         private ConfigVariable<float> maxDamageReduction;
+        private ConfigVariable<int> skillIncreaseTick;
+        private ConfigVariable<float> halfSailSkillIncreaseMultiplier;
+        private ConfigVariable<float> fullSailSkillIncreaseMultiplier;
 
         public float SkillIncrease
         {
@@ -33,6 +36,21 @@ namespace SailingSkill
         public float MaxDamageReduction
         {
             get { return -maxDamageReduction.Value; }
+        }
+
+        public int SkillIncreaseTick
+        {
+            get { return skillIncreaseTick.Value; }
+        }
+
+        public float HalfSailSkillIncreaseMultiplier
+        {
+            get { return halfSailSkillIncreaseMultiplier.Value; }
+        }
+
+        public float FullSailSkillIncreaseMultiplier
+        {
+            get { return fullSailSkillIncreaseMultiplier.Value; }
         }
 
         public void InitConfig(string id, ConfigFile config)
@@ -52,7 +70,12 @@ namespace SailingSkill
                 Debug.Log("Mod Config Enforcer not detected.");
             }
 
+            // TODO adjust skill increase ticks and timers
             skillIncrease = new ConfigVariable<float>(assembly, config, id, "SkillIncrease", .001f, "Leveling", "Higher the value the faster it levels up", true);
+            skillIncreaseTick = new ConfigVariable<int>(assembly, config, id, "skillIncreaseTick", 100, "Leveling", "Number of boat ticks to update skill after", true);
+            halfSailSkillIncreaseMultiplier = new ConfigVariable<float>(assembly, config, id, "halfSailSkillIncreaseMultiplier", 1.5f, "Leveling", "Exp multiplier for half sail sailing speed", true);
+            fullSailSkillIncreaseMultiplier = new ConfigVariable<float>(assembly, config, id, "fullSailSkillIncreaseMultiplier", 2.0f, "Leveling", "Exp multiplier for full sail sailing speed", true);
+
             maxTailwindBoost = new ConfigVariable<float>(assembly, config, id, "maxTailwindBoost", .5f, "Limits", "Maximum tailwind boost", true);
             maxForewindDampener = new ConfigVariable<float>(assembly, config, id, "maxForewindDampener", .5f, "Limits", "Maximum forewind slowdown force dampener", true);
             maxDamageReduction = new ConfigVariable<float>(assembly, config, id, "maxDamageReduction", .5f, "Limits", "Maximum ship damage reduction", true);
