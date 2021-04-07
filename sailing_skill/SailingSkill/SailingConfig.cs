@@ -70,8 +70,8 @@ namespace SailingSkill
                 Debug.Log("Mod Config Enforcer not detected.");
             }
 
-            skillIncrease = new ConfigVariable<float>(assembly, config, id, "skillIncrease", .002f, "Leveling", "Amount of skill exp granted per skillIncreaseTick", true);
-            skillIncreaseTick = new ConfigVariable<int>(assembly, config, id, "skillIncreaseTick", 120, "Leveling", "Number of boat update ticks to grant skill increase after, 60 is roughly equivalent to 1 second", true);
+            skillIncrease = new ConfigVariable<float>(assembly, config, id, "skillIncrease", .01f, "Leveling", "Amount of skill exp granted per skillIncreaseTick", true);
+            skillIncreaseTick = new ConfigVariable<int>(assembly, config, id, "skillIncreaseTick", 300, "Leveling", "Number of boat update ticks to grant skill increase after, 50 is roughly equivalent to 1 second", true);
             halfSailSkillIncreaseMultiplier = new ConfigVariable<float>(assembly, config, id, "halfSailSkillIncreaseMultiplier", 1.5f, "Leveling", "Exp multiplier for half sail sailing speed", true);
             fullSailSkillIncreaseMultiplier = new ConfigVariable<float>(assembly, config, id, "fullSailSkillIncreaseMultiplier", 2.0f, "Leveling", "Exp multiplier for full sail sailing speed", true);
 
