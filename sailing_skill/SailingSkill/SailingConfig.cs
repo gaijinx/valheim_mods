@@ -14,17 +14,32 @@ namespace SailingSkill
         public int NEXUS_ID = 922;
 
         private ConfigVariable<float> skillIncrease;
-        private ConfigVariable<float> maxTailwindBoost;
-        private ConfigVariable<float> maxForewindDampener;
-        private ConfigVariable<float> maxDamageReduction;
         private ConfigVariable<int> skillIncreaseTick;
         private ConfigVariable<float> halfSailSkillIncreaseMultiplier;
         private ConfigVariable<float> fullSailSkillIncreaseMultiplier;
+        private ConfigVariable<float> maxTailwindBoost;
+        private ConfigVariable<float> maxForewindDampener;
+        private ConfigVariable<float> maxDamageReduction;
+        private ConfigVariable<float> maxRudderBoost;
 
         public float SkillIncrease
         {
             get { return skillIncrease.Value; }
         }
+
+        public int SkillIncreaseTick
+        {
+            get { return skillIncreaseTick.Value; }
+        }
+        public float HalfSailSkillIncreaseMultiplier
+        {
+            get { return halfSailSkillIncreaseMultiplier.Value; }
+        }
+
+        public float FullSailSkillIncreaseMultiplier
+        {
+            get { return fullSailSkillIncreaseMultiplier.Value; }
+        }        
         public float MaxTailwindBoost
         {
             get { return maxTailwindBoost.Value; }
@@ -37,20 +52,9 @@ namespace SailingSkill
         {
             get { return -maxDamageReduction.Value; }
         }
-
-        public int SkillIncreaseTick
+        public float MaxRudderBoost
         {
-            get { return skillIncreaseTick.Value; }
-        }
-
-        public float HalfSailSkillIncreaseMultiplier
-        {
-            get { return halfSailSkillIncreaseMultiplier.Value; }
-        }
-
-        public float FullSailSkillIncreaseMultiplier
-        {
-            get { return fullSailSkillIncreaseMultiplier.Value; }
+            get { return maxRudderBoost.Value; }
         }
 
         public void InitConfig(string id, ConfigFile config)
@@ -77,6 +81,7 @@ namespace SailingSkill
 
             maxTailwindBoost = new ConfigVariable<float>(assembly, config, id, "maxTailwindBoost", .5f, "Limits", "Maximum tailwind boost", true);
             maxForewindDampener = new ConfigVariable<float>(assembly, config, id, "maxForewindDampener", .5f, "Limits", "Maximum forewind slowdown force dampener", true);
+            maxRudderBoost = new ConfigVariable<float>(assembly, config, id, "maxRudderBoost", .5f, "Limits", "Maximum rudder speed boost", true);
             maxDamageReduction = new ConfigVariable<float>(assembly, config, id, "maxDamageReduction", .5f, "Limits", "Maximum ship damage reduction", true);
         }
     }

@@ -6,6 +6,7 @@ Affected ship stats (configurable):
 - Tailwind Speed Boost - increases tailwind speed, up to 50% boost by default
 - Forewind Dampening - decreases forewind force, up to 50% less by default
 - Damage Reduction - decreases ship damage received, up to 50% less by default
+- Rudder Speed Increase - increased rowing speed, up to 50% increase by default
 
 Configurable variables:
 - skillIncrease - amount of exp gained per one sailing tick
@@ -14,6 +15,7 @@ Configurable variables:
 - fullSailSkillIncreaseMultiplier - amount of skillIncreaseTicks per boat tick when current ship speed is set to full sail
 - maxTailwindBoost - maximum tailwind speed boost for level 100 sailing skill
 - maxForewindDampener - maximum forewind force dampening for level 100 sailing skill
+- maxRudderBoost - maximum rowing speed increase for level 100 sailing skill
 - maxDamageReduction - maximum ship damage reduction for level 100 sailing skill
 
 Requirements:

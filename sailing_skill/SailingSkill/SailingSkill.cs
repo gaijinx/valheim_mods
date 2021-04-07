@@ -7,7 +7,7 @@ using UnityEngine;
 namespace SailingSkill
 {
 
-    [BepInPlugin("gaijinx.mod.sailing_skill", "SailingSkill", "1.1.2")]
+    [BepInPlugin("gaijinx.mod.sailing_skill", "SailingSkill", "1.2.0")]
     [BepInDependency("pfhoenix.modconfigenforcer", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.pipakin.SkillInjectorMod")]
     public class SailingSkillsPlugin : BaseUnityPlugin
@@ -95,7 +95,21 @@ namespace SailingSkill
         public static class FixedUpdate_Patch
         {
             private static float m_increase_timer = 0f;
-            private static void Postfix(ref Ship __instance)
+            private static float m_original_backward_force;
+
+            private static void Prefix(ref Ship __instance, ref float ___m_backwardForce)
+            {
+                if (IsPlayerControlling(__instance)) {
+                    Ship.Speed shipSpeed = __instance.GetSpeedSetting();
+                    if (shipSpeed == Ship.Speed.Slow || shipSpeed == Ship.Speed.Back)
+                    {
+                        m_original_backward_force = ___m_backwardForce;
+                        ___m_backwardForce *= GetSkillFactorMultiplier(sailingConfig.MaxRudderBoost);
+                    }
+                }
+            }
+
+            private static void Postfix(ref Ship __instance, ref float ___m_backwardForce)
             {
                 if (IsPlayerControlling(__instance)) {
                     Ship.Speed shipSpeed = __instance.GetSpeedSetting();
@@ -120,6 +134,10 @@ namespace SailingSkill
                         {
                             Player.m_localPlayer.RaiseSkill((Skills.SkillType)SKILL_TYPE, sailingConfig.SkillIncrease);
                             m_increase_timer -= sailingConfig.SkillIncreaseTick;
+                        }
+                        if (!m_original_backward_force.Equals(null))
+                        {
+                            ___m_backwardForce = m_original_backward_force;
                         }
                     }
                 }
