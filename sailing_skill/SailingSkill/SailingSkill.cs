@@ -122,7 +122,6 @@ namespace SailingSkill
                             Player.m_localPlayer.RaiseSkill((Skills.SkillType)SKILL_TYPE, sailingConfig.SkillIncrease);
                             m_increase_timer -= sailingConfig.SkillIncreaseTick;
                         }
-                        UnityEngine.Debug.Log(m_increase_timer); // TODO remove
                     }
                 }
             }
