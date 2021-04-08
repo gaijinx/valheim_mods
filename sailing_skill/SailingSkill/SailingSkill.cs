@@ -7,13 +7,14 @@ using UnityEngine;
 namespace SailingSkill
 {
 
-    [BepInPlugin("gaijinx.mod.sailing_skill", "SailingSkill", "1.2.0")]
+    [BepInPlugin("gaijinx.mod.sailing_skill", "SailingSkill", "1.2.1")]
     [BepInDependency("pfhoenix.modconfigenforcer", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.pipakin.SkillInjectorMod")]
     public class SailingSkillsPlugin : BaseUnityPlugin
     {
         public const String MOD_ID = "gaijinx.mod.sailing_skill";
         public const int SKILL_TYPE = 1339;
+        Harmony harmony;
 
         private static SailingConfig sailingConfig = new SailingConfig();
 
@@ -22,10 +23,15 @@ namespace SailingSkill
 
             sailingConfig.InitConfig(MOD_ID, Config);
 
-            var harmony = new Harmony(MOD_ID);
+            harmony = new Harmony(MOD_ID);
             harmony.PatchAll();
 
             SkillInjector.RegisterNewSkill(SKILL_TYPE, "Sailing", "Describes sailing ability", 1.0f, null, Skills.SkillType.Run);
+        }
+
+        void onDestroy()
+        {
+            if (harmony != null) harmony.UnpatchAll(null);
         }
 
         public static bool IsPlayerControlling(Ship ship)
