@@ -65,9 +65,23 @@ namespace SailingSkill
 
             if (assembly != null)
             {
-                Debug.Log("[SailingSkill] Mod Config Enforcer detected, registering mod...");
-                var configManagerType = assembly.GetType("ModConfigEnforcer.ConfigManager");
-                Traverse.Create(configManagerType).Method("RegisterMod", id, config).GetValue(id, config);
+                try
+                {
+                    // Try to register using MCE
+                    Debug.Log("[CraftingSkill] Mod Config Enforcer detected, registering mod...");
+                    var configManagerType = assembly.GetType("ModConfigEnforcer.ConfigManager");
+                    Debug.Log("configManagerType: " + configManagerType.ToString());
+                    var traverse = Traverse.Create(configManagerType);
+                    var serverConfigReceivedDelegateType = (Type)traverse.Type("ServerConfigReceivedDelegate").GetValue();
+                    Type[] paramTypes = { typeof(string), typeof(ConfigFile), serverConfigReceivedDelegateType };
+                    traverse.Method("RegisterMod", paramTypes).GetValue(id, config, null);
+                }
+                catch (Exception)
+                {
+                    // registering mod failed, API may have changed
+                    // pretend MCE doesn't exist
+                    assembly = null;
+                }
             }
             else
             {

@@ -2,6 +2,7 @@
 using HarmonyLib;
 using Pipakin.SkillInjectorMod;
 using System;
+using System.Reflection;
 using UnityEngine;
 
 namespace SailingSkill
@@ -31,7 +32,24 @@ namespace SailingSkill
 
         public static bool IsPlayerControlling(Ship ship)
         {
-            return ship.HaveControllingPlayer() && ship.m_shipControlls.IsLocalUser();
+            if (!Player.m_localPlayer)
+            {
+                return false;
+            }
+            if (!ship.HaveControllingPlayer())
+            { 
+                return false;
+            }
+
+            MethodInfo GetUser = ship.m_shipControlls.GetType().GetMethod("GetUser", BindingFlags.NonPublic | BindingFlags.Instance);
+            ZDOID user = (ZDOID)GetUser.Invoke(ship.m_shipControlls, new object[] { });
+
+            //ZDOID user = ship.m_shipControlls.GetUser();
+            if (user.IsNone())
+            {
+                return false;
+            }
+            return user == Player.m_localPlayer.GetZDOID();
         }
 
 
